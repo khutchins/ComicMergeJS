@@ -86,10 +86,17 @@ button,
     font-size: 1.65em;
 }
 
+select {
+    vertical-align: text-bottom;
+}
+
+label {
+    margin-top: 10px;
+    display: inline-block;
+    vertical-align: middle;
+}
 
 .form-label {
-    min-width: 240px;
-    margin-top: 10px;
     margin-right: 8px;
 }
 
@@ -97,19 +104,10 @@ input[type=text] {
     height: 21px;
 }
 
-label {
-    margin-top: 5px;
-    margin-bottom: 5px;
-    display: flex;
-    align-items: center;
-}
-
 input[type=text],
 button {
     box-sizing: content-box;
-    height: 25px;
     text-align: center;
-    outline-color: #c1c1c1;
     background-color: #353535;
 }
 
@@ -215,7 +213,7 @@ hr {
 }
 
 ul {
-    padding-left: 20px;
+    margin: 5px 0;
 }
 
 code {
