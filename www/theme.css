@@ -266,6 +266,15 @@ code {
     border-radius: 10%;
     height: .8em;
     line-height: .8em;
+    margin-right: 15px;
+}
+
+.file-delete {
+    background-color: #880000;
+    color: white;
+    min-width: 30px;
+    text-align: center;
+    border-radius: 10%;
 }
 
 .drop-target {

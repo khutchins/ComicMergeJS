@@ -74,8 +74,18 @@ const sortable = new Sortable(fileList, {
         file.waitForEntries().then(x => {
             fileCount.textContent = `${file.entries.length}`;
         });
+        const deleteRow = document.createElement('span');
+        deleteRow.classList.add('file-delete');
+        deleteRow.textContent = '✗';
+        deleteRow.onclick = (ev) => {
+            ev.preventDefault();
+            fileList.removeChild(li);
+            biMap.removeByValue(li);
+        }
         filenameContainer.appendChild(filename);
         filenameContainer.appendChild(fileCount);
+        filenameContainer.appendChild(deleteRow);
+
         return li;
     }
 }
@@ -87,7 +97,7 @@ const sortable = new Sortable(fileList, {
     async function onDownloadButtonClick(event) {
         let blobURL;
         try {
-            blobURL = await cbzMerge.generateZip(cbzMerge.files);
+            blobURL = await cbzMerge.generateZip(sortable.toArray().map(x => cbzMerge.files.filter(q => q.idx === x)[0]));
         } catch (error) {
             alert(error);
         }
@@ -105,9 +115,7 @@ const sortable = new Sortable(fileList, {
 // List reordering
 {
     function sortRows(compareFn: (a: ZipFile, b: ZipFile) => number) {
-        const arr = sortable.toArray();
-        const newArr = arr.map(x => cbzMerge.files.filter(q => q.idx === x)[0]).sort(compareFn).map(x => x.idx);
-        console.log(newArr);
+        const newArr = sortable.toArray().map(x => cbzMerge.files.filter(q => q.idx === x)[0]).sort(compareFn).map(x => x.idx);
         sortable.sort(newArr);
     }
 
