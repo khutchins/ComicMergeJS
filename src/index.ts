@@ -63,17 +63,27 @@ const sortable = new Sortable(fileList, {
         const li = document.createElement("li") as HTMLElement;
         li.classList.add('sortable-item');
         li.setAttribute('data-id', file.idx);
-        const filenameContainer = document.createElement("span");
-        const filename = document.createElement("span");
-        filenameContainer.classList.add("filename-container");
-        li.appendChild(filenameContainer);
-        filename.classList.add("filename");
+
+        const filenameContainer = document.createElement('div');
+        filenameContainer.classList.add('filename-container');
+
+        const handle = document.createElement('span');
+        handle.classList.add('handle');
+        handle.textContent = '☰';
+        filenameContainer.appendChild(handle);
+
+        const filename = document.createElement('span');
+        filename.classList.add('filename');
         filename.textContent = filename.title = `${file.file.name}`;
-        const fileCount = document.createElement("span");
-        fileCount.classList.add("filecount");
-        file.waitForEntries().then(x => {
+        filenameContainer.appendChild(filename);
+
+        const fileCount = document.createElement('span');
+        fileCount.classList.add('filecount');
+        file.waitForEntries().then(_ => {
             fileCount.textContent = `${file.entries.length}`;
         });
+        filenameContainer.appendChild(fileCount);
+
         const deleteRow = document.createElement('span');
         deleteRow.classList.add('file-delete');
         deleteRow.textContent = '⌫';
@@ -82,9 +92,9 @@ const sortable = new Sortable(fileList, {
             fileList.removeChild(li);
             biMap.removeByValue(li);
         }
-        filenameContainer.appendChild(filename);
-        filenameContainer.appendChild(fileCount);
         filenameContainer.appendChild(deleteRow);
+
+        li.appendChild(filenameContainer);
 
         return li;
     }

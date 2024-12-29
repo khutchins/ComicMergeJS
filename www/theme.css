@@ -3,10 +3,6 @@
     max-width: 800px;
 }
 
-#container li {
-    min-height: 60px;
-}
-
 #file-list {
     min-width: 200px;
     padding-left: 10px;
@@ -26,7 +22,7 @@ button,
 }
 
 #download-button[disabled] {
-    cursor: not-allowed;
+    cursor: wait;
 }
 
 #file-list {
@@ -37,45 +33,58 @@ button,
     display: block;
     overflow: hidden;
     text-overflow: ellipsis;
-    position: relative;
+    /* position: relative; */
     font-size: 11pt;
-    margin: .5em;
-    min-height: 35px;
-}
-
-#file-list li.pending {
-    color: #b1b1b1;
-}
-
-#file-list li.busy {
-    font-style: italic;
 }
 
 #file-list .filename-container {
     display: flex;
+    align-items: center;
+    background: #111;
+    margin: 0.25em 0;
+    border-radius: 5px;
+    height: 35px;
+    padding-left: 5px;
+    overflow: hidden;
+}
+
+#file-list .handle {
+    content: '☰';
+    color: #fff;
+    font-weight: bold;
+    padding: 0 5px;
+    font-size: 1.5em;
 }
 
 #file-list .filename {
     text-overflow: ellipsis;
     overflow: hidden;
     flex: 1;
-    margin-bottom: 8px;
 }
 
-#file-list .filename-container button {
-    display: none;
-    flex: 0;
-    font-size: 9px;
-    margin: 0;
-    padding: 3px;
-    padding-right: 4px;
-    height: 12px;
-    margin-left: 8px;
+
+#file-list .filecount {
+    background-color: #048f0b;
+    font-weight: bold;
+    font-size: 80%;
+    font-family: sans-serif;
+    padding: 2px 5px;
+    border-radius: 10%;
+    height: .8em;
+    line-height: .8em;
+    margin-right: 15px;
 }
 
-#file-list .busy .filename-container button {
-    display: block;
+#file-list .file-delete {
+    background-color: #880000;
+    color: white;
+    min-width: 40px;
+    height: 100%;
+    text-align: center;
+    cursor: pointer;
+    /* border-radius: 0 5px 5px 0; */
 }
+
 
 .form-label {
     min-width: 240px;
@@ -100,12 +109,12 @@ button {
     height: 25px;
     text-align: center;
     outline-color: #c1c1c1;
-    background-color: #ececec;
+    background-color: #353535;
 }
 
 input[type=text]:hover,
 button:hover {
-    background-color: #e4e4e4;
+    background-color: #262626;
 }
 
 input[type=text][disabled],
@@ -147,25 +156,6 @@ progress {
     }
 }
 
-@media (prefers-color-scheme: dark) {
-
-    input[type="text"],
-    button {
-        background-color: #353535;
-    }
-
-    input[type="text"],
-    button
-    #file-list {
-        color: whitesmoke;
-    }
-
-    input[type="text"]:hover,
-    button:hover {
-        background-color: #262626;
-    }
-}
-
 body {
     margin-top: 10px;
     background-image: linear-gradient(90deg, #100231, #210464);
@@ -182,7 +172,7 @@ body {
 }
 
 h1 {
-    font-size: 4em;
+    font-size: 2em;
     color: #210464;
     margin-bottom: 3px;
     margin-top: 20px;
@@ -223,10 +213,6 @@ hr {
     border-bottom: 1px solid #aaa;
 }
 
-li {
-    margin-bottom: 0.5em;
-}
-
 ul {
     padding-left: 20px;
 }
@@ -255,26 +241,6 @@ code {
     color: #888;
     font-size: 80%;
     text-align: center;
-}
-
-.filecount {
-    background-color: #048f0b;
-    font-weight: bold;
-    font-size: 80%;
-    font-family: sans-serif;
-    padding: 2px 5px;
-    border-radius: 10%;
-    height: .8em;
-    line-height: .8em;
-    margin-right: 15px;
-}
-
-.file-delete {
-    background-color: #880000;
-    color: white;
-    min-width: 30px;
-    text-align: center;
-    border-radius: 10%;
 }
 
 .drop-target {
