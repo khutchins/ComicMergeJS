@@ -29,7 +29,7 @@ button,
     cursor: not-allowed;
 }
 
-#file-list.empty {
+#file-list {
     min-height: 25px;
 }
 
