@@ -90,15 +90,27 @@ const sortable = new Sortable(fileList, {
     }
 }
 
+function zipFileOrder(): ZipFile[] {
+    return sortable.toArray().map(x => cbzMerge.files.filter(q => q.idx === x)[0]);
+}
+
 // Downloads
 {
-    const downloadButton = document.getElementById("download-button") as HTMLButtonElement;
+    const downloadButton = document.getElementById('download-button') as HTMLButtonElement;
+    const progressBar = document.getElementById('download-progress') as HTMLProgressElement;
     downloadButton.addEventListener("click", onDownloadButtonClick, false);
     async function onDownloadButtonClick(event) {
         
         try {
             downloadButton.disabled = true;
-            const blobURL = await cbzMerge.generateZip(sortable.toArray().map(x => cbzMerge.files.filter(q => q.idx === x)[0]));
+            progressBar.classList.replace('hide', 'show');
+            const blobURL = await cbzMerge.generateZip(
+                zipFileOrder(),
+                (value, max) => {
+                    progressBar.max = max;
+                    progressBar.value = value;
+                }
+            );
             if (blobURL) {
                 const anchor = document.createElement("a");
                 const clickEvent = new MouseEvent("click");
@@ -111,6 +123,7 @@ const sortable = new Sortable(fileList, {
         } finally {
             event.preventDefault();
             downloadButton.disabled = false;
+            progressBar.classList.replace('show', 'hide');
         }
     }
 }
@@ -118,8 +131,7 @@ const sortable = new Sortable(fileList, {
 // List reordering
 {
     function sortRows(compareFn: (a: ZipFile, b: ZipFile) => number) {
-        const newArr = sortable.toArray().map(x => cbzMerge.files.filter(q => q.idx === x)[0]).sort(compareFn).map(x => x.idx);
-        sortable.sort(newArr);
+        sortable.sort(zipFileOrder().sort(compareFn).map(x => x.idx));
     }
 
     function smartCompare(a: ZipFile, b: ZipFile): number {

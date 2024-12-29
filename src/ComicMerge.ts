@@ -32,17 +32,26 @@ export default class ComicMerge {
         return URL.createObjectURL(await entry.getData(new zip.BlobWriter(), options));
     }
 
-    async generateZip(fileOrder: ZipFile[]) {
+    async generateZip(fileOrder: ZipFile[], progressListener?: (value: number, max: number) => void) {
+        function notifyProgress() {
+            if (progressListener) progressListener(fileIdx, count);
+        }
+
         const zipWriter = new zip.ZipWriter(new zip.BlobWriter("application/zip"))
         const fileCount = fileOrder.length;
         const maxLength = fileCount.toString().length;
+        await Promise.all(fileOrder.map(i => i.waitForEntries()));
+        const count = fileOrder.map(i => i.entries.length).reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+        let fileIdx = 0;
+        notifyProgress();
         for (let i = 0; i < fileCount; i++) {
             const zipFile = fileOrder[i];
-            await zipFile.waitForEntries();
             for (let zfi = 0; zfi < zipFile.entries.length; zfi++) {
                 const entry = zipFile.entries[zfi];
                 const data = await entry.getData(new zip.BlobWriter()) as Blob;
                 zipWriter.add(`${i.toString().padStart(maxLength, '0')} - ${zipFile.file.name} - ${entry.filename}`, new zip.BlobReader(data));
+                fileIdx += 1;
+                notifyProgress();
             }
         }
 
