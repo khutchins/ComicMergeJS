@@ -76,7 +76,7 @@ const sortable = new Sortable(fileList, {
         });
         const deleteRow = document.createElement('span');
         deleteRow.classList.add('file-delete');
-        deleteRow.textContent = '✗';
+        deleteRow.textContent = '⌫';
         deleteRow.onclick = (ev) => {
             ev.preventDefault();
             fileList.removeChild(li);
@@ -92,23 +92,26 @@ const sortable = new Sortable(fileList, {
 
 // Downloads
 {
-    const downloadButton = document.getElementById("download-button");
+    const downloadButton = document.getElementById("download-button") as HTMLButtonElement;
     downloadButton.addEventListener("click", onDownloadButtonClick, false);
     async function onDownloadButtonClick(event) {
-        let blobURL;
+        
         try {
-            blobURL = await cbzMerge.generateZip(sortable.toArray().map(x => cbzMerge.files.filter(q => q.idx === x)[0]));
+            downloadButton.disabled = true;
+            const blobURL = await cbzMerge.generateZip(sortable.toArray().map(x => cbzMerge.files.filter(q => q.idx === x)[0]));
+            if (blobURL) {
+                const anchor = document.createElement("a");
+                const clickEvent = new MouseEvent("click");
+                anchor.href = blobURL;
+                anchor.download = 'Download.cbz';
+                anchor.dispatchEvent(clickEvent);
+            }
         } catch (error) {
             alert(error);
+        } finally {
+            event.preventDefault();
+            downloadButton.disabled = false;
         }
-        if (blobURL) {
-            const anchor = document.createElement("a");
-            const clickEvent = new MouseEvent("click");
-            anchor.href = blobURL;
-            anchor.download = 'Download.cbz';
-            anchor.dispatchEvent(clickEvent);
-        }
-        event.preventDefault();
     }
 }
 
