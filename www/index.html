@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>CbzMergeJS</title>
+	<meta name="viewport" content="width=device-width">
+	<link rel="stylesheet" href="theme.css">
+</head>
+
+<body>
+	<div id="container">
+		<h1>
+			<a href="./">ComicMergeJS</a>
+		</h1>
+
+		<div class="description">
+			Merge .cbz files in your browser.
+			<hr>
+		</div>
+		<div>
+			<div id="file-drop-area">
+					<div class="drop-target">Click or Drag Files Here to Add</div>
+					<input type="file" id="file-input" accept="application/zip,.cbz" hidden multiple>
+			</div>
+			<div>
+				<label>
+					<span class="form-label">Sort Order</span>
+          <select id="sort-order">
+            <option>Smart</option>
+            <option>Alphabetical</option>
+            <option>Custom</option>
+          </select>
+					<ul id="file-list" class="empty">
+					</ul>
+				</label>
+			</div>
+      <div>
+				<label>
+					<span class="form-label">Download Merged File</span>
+					<button id="download-button">Download</button>
+				</label>
+			</div>
+		</div>
+  <div class="caveat"><p>This page runs client-side. No files will be uploaded to or downloaded from the internet.</p></div>
+  <div class="caveat2"><p>Made with a vague sense of ennui by <a href='https://github.com/khutchins'>Kevin Hutchins</a>.</p></div>
+	</div>
+	<script type="text/javascript" src="bundle.js"></script>
+</body>
+</html>

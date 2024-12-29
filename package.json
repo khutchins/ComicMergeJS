@@ -1,0 +1,27 @@
+{
+  "name": "comicmergejs",
+  "version": "1.0.0",
+  "description": "Merges multiple cbz files into a bigger cbz file.",
+  "main": "index.ts",
+  "scripts": {
+    "build:prod": "webpack --config webpack.prod.js",
+    "build:dev": "webpack --config webpack.dev.js",
+    "dev": "webpack-dev-server --open --config webpack.dev.js"
+  },
+  "author": "Kevin Hutchins",
+  "license": "MIT",
+  "dependencies": {
+    "@zip.js/zip.js": "^2.7.54",
+    "copy-webpack-plugin": "^12.0.2",
+    "node-polyfill-webpack-plugin": "^4.1.0",
+    "typescript": "^5.7.2",
+    "webpack-dev-server": "^5.2.0"
+  },
+  "devDependencies": {
+    "css-loader": "^7.1.2",
+    "style-loader": "^4.0.0",
+    "ts-loader": "^9.5.1",
+    "webpack": "^5.97.1",
+    "webpack-cli": "^6.0.1"
+  }
+}
