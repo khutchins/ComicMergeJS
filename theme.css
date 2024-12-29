@@ -15,6 +15,7 @@
 input[type=text],
 button,
 #file-list {
+    /* flex-grow: 1; */
     font-size: 12pt;
     padding: 4px;
     color: #e9e9e9;
