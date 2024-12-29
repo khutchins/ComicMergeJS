@@ -7,9 +7,11 @@ export type FileAddedListener = (file: ZipFile) => void;
 export default class ComicMerge {
     files: ZipFile[] = [];
     listeners: Set<FileAddedListener> = new Set();
+    lastIdx = -1;
 
     addFile(file: File) {
-        const zipFile = new ZipFile(file);
+        this.lastIdx++;
+        const zipFile = new ZipFile(file, String(this.lastIdx));
         this.files.push(zipFile);
         for(const listener of this.listeners) {
             listener(zipFile);
@@ -57,9 +59,11 @@ export class ZipFile {
     file: File;
     entries: Entry[];
     entriesPromise: Promise<Entry[]>;
+    idx: string;
 
-    constructor(file: File) {
+    constructor(file: File, idx: string) {
         this.file = file;
+        this.idx = idx;
         this.entriesPromise = (new zip.ZipReader(new zip.BlobReader(file))).getEntries({});
         this.entriesPromise.then(e => {
             this.entries = e;

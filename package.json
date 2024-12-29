@@ -11,6 +11,7 @@
   "author": "Kevin Hutchins",
   "license": "MIT",
   "dependencies": {
+    "@types/sortablejs": "^1.15.8",
     "@zip.js/zip.js": "^2.7.54",
     "copy-webpack-plugin": "^12.0.2",
     "node-polyfill-webpack-plugin": "^4.1.0",
