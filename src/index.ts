@@ -160,7 +160,7 @@ function zipFileOrder(): ZipFile[] {
         if (sortOption.value === 'smart') {
             sortRows(smartCompare);
         } else if (sortOption.value === 'alpha') {
-            sortRows((a, b) => a.file.name < b.file.name ? -1 : a.file.name > b.file.name ? 1 : 0);
+            sortRows((a, b) => a.file.name.localeCompare(b.file.name));
         }
     }
 
