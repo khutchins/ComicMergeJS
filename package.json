@@ -6,10 +6,15 @@
   "scripts": {
     "build:prod": "webpack --config webpack.prod.js",
     "build:dev": "webpack --config webpack.dev.js",
-    "dev": "webpack-dev-server --open --config webpack.dev.js"
+    "dev": "webpack-dev-server --open --config webpack.dev.js",
+    "deploy": "gh-pages -d dist"
   },
   "author": "Kevin Hutchins",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/khutchins/ComicMergeJS.git"
+  },
   "dependencies": {
     "@types/sortablejs": "^1.15.8",
     "@zip.js/zip.js": "^2.7.54",
@@ -21,6 +26,7 @@
   },
   "devDependencies": {
     "css-loader": "^7.1.2",
+    "gh-pages": "^6.2.0",
     "style-loader": "^4.0.0",
     "ts-loader": "^9.5.1",
     "webpack": "^5.97.1",

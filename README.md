@@ -4,7 +4,7 @@
 
 This is a simple single-page tool that allows you to merge multiple .cbz files into a single .cbz file in your browser without downloading anything. It's an evolution of [ComicMerge](https://github.com/khutchins/ComicMerge), but in a format that doesn't require me to install anything and has a visual interface.
 
-If all you want is the page that does this, click [here](https://example.com).
+If all you want is the page that does this, click [here](https://khutchins.github.io/ComicMergeJS).
 
 ## Details
 
