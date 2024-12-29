@@ -78,11 +78,12 @@ button,
 #file-list .file-delete {
     background-color: #880000;
     color: white;
-    min-width: 40px;
+    min-width: 50px;
     height: 100%;
+    display: inline-block;
     text-align: center;
     cursor: pointer;
-    /* border-radius: 0 5px 5px 0; */
+    font-size: 1.65em;
 }
 
 
